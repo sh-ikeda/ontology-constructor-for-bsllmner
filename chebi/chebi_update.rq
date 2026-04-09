@@ -1,0 +1,19 @@
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+INSERT {
+  ?s rdfs:comment ?comment .
+}
+WHERE {
+  ?s rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty obo:RO_0000087 ;
+    owl:someValuesFrom ?role
+  ] .
+  ?role rdfs:label ?role_label .
+  ?role_type rdfs:subClassOf obo:CHEBI_50906 .
+  ?role rdfs:subClassOf+ ?role_type .
+  ?role_type rdfs:label ?role_type_label .
+  BIND (CONCAT(?role_type_label, ": ", ?role_label) AS ?comment)
+}

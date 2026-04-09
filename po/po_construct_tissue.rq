@@ -1,0 +1,25 @@
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX oboinowl: <http://www.geneontology.org/formats/oboInOwl#>
+
+CONSTRUCT {
+  ?s ?p ?o .
+}
+WHERE {
+  ?s rdfs:subClassOf+ obo:PO_0009011 .
+  FILTER NOT EXISTS {
+    ?s rdfs:subClassOf+ obo:PO_0009002 .
+  }
+
+  VALUES ?p {
+    oboinowl:id
+    rdfs:label
+    oboinowl:hasRelatedSynonym
+    oboinowl:hasExactSynonym
+    oboinowl:hasNarrowSynonym
+    oboinowl:hasBroadSynonym
+    obo:IAO_0000115
+  }
+
+  ?s ?p ?o .
+}
