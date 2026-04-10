@@ -1,0 +1,23 @@
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX oboinowl: <http://www.geneontology.org/formats/oboInOwl#>
+PREFIX uberon: <http://purl.obolibrary.org/obo/uberon/core#>
+
+CONSTRUCT {
+  ?s ?p ?o .
+}
+WHERE {
+  ?s oboinowl:inSubset uberon:mouse_subset .
+
+  VALUES ?p {
+    oboinowl:id
+    rdfs:label
+    oboinowl:hasRelatedSynonym
+    oboinowl:hasExactSynonym
+    oboinowl:hasNarrowSynonym
+    oboinowl:hasBroadSynonym
+    obo:IAO_0000115
+  }
+
+  ?s ?p ?o .
+}
