@@ -1,0 +1,24 @@
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX oboinowl: <http://www.geneontology.org/formats/oboInOwl#>
+PREFIX efo: <http://www.ebi.ac.uk/efo/>
+
+CONSTRUCT {
+  ?s ?p ?o .
+}
+WHERE {
+  ?s rdfs:subClassOf+ efo:EFO_0000324 .  # cell type
+
+  VALUES ?p {
+    oboinowl:id
+    rdfs:label
+    oboinowl:hasRelatedSynonym
+    oboinowl:hasExactSynonym
+    oboinowl:hasNarrowSynonym
+    oboinowl:hasBroadSynonym
+    obo:IAO_0000115
+  }
+
+  ?s ?p ?o .
+  FILTER (STRSTARTS(STR(?s), "http://www.ebi.ac.uk/efo/EFO_"))
+}
